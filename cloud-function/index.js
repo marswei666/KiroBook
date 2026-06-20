@@ -16,7 +16,7 @@ exports.main = async (event, context) => {
     return { statusCode: 400, body: { error: "Invalid JSON" } };
   }
 
-  const { userUUID, userName, totalCheckIns, totalCountries, totalCities, updatedAt, platform } = body;
+  const { userUUID, userName, totalCheckIns, totalCountries, totalCities, updatedAt, platform, deviceBrand } = body;
 
   if (!userUUID) {
     return { statusCode: 400, body: { error: "userUUID is required" } };
@@ -33,6 +33,7 @@ exports.main = async (event, context) => {
         totalCities,
         updatedAt,
         platform,
+        deviceBrand: deviceBrand || "",
       });
     } else {
       await collection.add({
@@ -43,6 +44,7 @@ exports.main = async (event, context) => {
         totalCities,
         updatedAt,
         platform,
+        deviceBrand: deviceBrand || "",
       });
     }
 
