@@ -29,6 +29,10 @@
 		C27D8B092F869DAD00EEDDA5 /* FullMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D8B082F869DAD00EEDDA5 /* FullMapView.swift */; };
 		C27D8B0B2F86A24800EEDDA5 /* IconPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D8B0A2F86A24800EEDDA5 /* IconPickerSheet.swift */; };
 		C27D8B0D2F86B00000EEDDA5 /* LocalizedMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D8B0C2F86B00000EEDDA5 /* LocalizedMapView.swift */; };
+		DD000001DD000001DD000001 /* SubscriptionTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000011DD000011DD000011 /* SubscriptionTier.swift */; };
+		DD000002DD000002DD000002 /* SubscriptionApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000012DD000012DD000012 /* SubscriptionApiService.swift */; };
+		DD000003DD000003DD000003 /* AppleSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000013DD000013DD000013 /* AppleSubscriptionManager.swift */; };
+		DD000004DD000004DD000004 /* SubscriptionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000014DD000014DD000014 /* SubscriptionViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		C27D8B082F869DAD00EEDDA5 /* FullMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullMapView.swift; sourceTree = "<group>"; };
 		C27D8B0A2F86A24800EEDDA5 /* IconPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerSheet.swift; sourceTree = "<group>"; };
 		C27D8B0C2F86B00000EEDDA5 /* LocalizedMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedMapView.swift; sourceTree = "<group>"; };
+		DD000011DD000011DD000011 /* SubscriptionTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTier.swift; sourceTree = "<group>"; };
+		DD000012DD000012DD000012 /* SubscriptionApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionApiService.swift; sourceTree = "<group>"; };
+		DD000013DD000013DD000013 /* AppleSubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSubscriptionManager.swift; sourceTree = "<group>"; };
+		DD000014DD000014DD000014 /* SubscriptionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +80,7 @@
 		41B7F80D2F5C404E00AB0757 = {
 			isa = PBXGroup;
 			children = (
-				CC000001CC000001CC000001 /* WanderLog */,
+				CC000001CC000001CC000001 /* KiroBook */,
 				41B7F8172F5C404E00AB0757 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,7 +93,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CC000001CC000001CC000001 /* WanderLog */ = {
+		CC000001CC000001CC000001 /* KiroBook */ = {
 			isa = PBXGroup;
 			children = (
 				4167E65F2FE691AF0097852D /* CloudSyncService.swift */,
@@ -97,6 +105,10 @@
 				AA000006AA000006AA000006 /* EntryStore.swift */,
 				AA000007AA000007AA000007 /* HomeView.swift */,
 				AA000008AA000008AA000008 /* LocationManager.swift */,
+				DD000011DD000011DD000011 /* SubscriptionTier.swift */,
+				DD000012DD000012DD000012 /* SubscriptionApiService.swift */,
+				DD000013DD000013DD000013 /* AppleSubscriptionManager.swift */,
+				DD000014DD000014DD000014 /* SubscriptionViews.swift */,
 				AA000009AA000009AA000009 /* Tag.swift */,
 				AA00000AAA00000AAA00000A /* CollectionView.swift */,
 				AA00000BAA00000BAA00000B /* MapTabView.swift */,
@@ -112,15 +124,15 @@
 				AA000012AA000012AA000012 /* LanguageManager.swift */,
 				AA000013AA000013AA000013 /* CalendarView.swift */,
 			);
-			path = WanderLog;
+			path = KiroBook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		41B7F8152F5C404E00AB0757 /* WanderLog */ = {
+		41B7F8152F5C404E00AB0757 /* KiroBook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 41B7F8232F5C405300AB0757 /* Build configuration list for PBXNativeTarget "WanderLog" */;
+			buildConfigurationList = 41B7F8232F5C405300AB0757 /* Build configuration list for PBXNativeTarget "KiroBook" */;
 			buildPhases = (
 				41B7F8122F5C404E00AB0757 /* Sources */,
 				41B7F8132F5C404E00AB0757 /* Frameworks */,
@@ -130,10 +142,10 @@
 			);
 			dependencies = (
 			);
-			name = WanderLog;
+			name = KiroBook;
 			packageProductDependencies = (
 			);
-			productName = WanderLog;
+			productName = KiroBook;
 			productReference = 41B7F8162F5C404E00AB0757 /* Kiro Book.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -152,7 +164,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 41B7F8112F5C404E00AB0757 /* Build configuration list for PBXProject "WanderLog" */;
+			buildConfigurationList = 41B7F8112F5C404E00AB0757 /* Build configuration list for PBXProject "KiroBook" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -165,7 +177,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				41B7F8152F5C404E00AB0757 /* WanderLog */,
+				41B7F8152F5C404E00AB0757 /* KiroBook */,
 			);
 		};
 /* End PBXProject section */
@@ -197,6 +209,10 @@
 				BB000006BB000006BB000006 /* EntryStore.swift in Sources */,
 				BB000007BB000007BB000007 /* HomeView.swift in Sources */,
 				BB000008BB000008BB000008 /* LocationManager.swift in Sources */,
+				DD000001DD000001DD000001 /* SubscriptionTier.swift in Sources */,
+				DD000002DD000002DD000002 /* SubscriptionApiService.swift in Sources */,
+				DD000003DD000003DD000003 /* AppleSubscriptionManager.swift in Sources */,
+				DD000004DD000004DD000004 /* SubscriptionViews.swift in Sources */,
 				BB000009BB000009BB000009 /* Tag.swift in Sources */,
 				BB00000ABB00000ABB00000A /* CollectionView.swift in Sources */,
 				BB00000BBB00000BBB00000B /* MapTabView.swift in Sources */,
@@ -338,11 +354,11 @@
 				DEVELOPMENT_TEAM = 5CU6L75C9G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WanderLog/Info.plist;
+				INFOPLIST_FILE = KiroBook/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kiro Book";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WanderLog 需要获取你的位置，以便自动填写打卡城市和国家";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "WanderLog 需要访问你的相册，以便添加打卡照片";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "KiroBook 需要获取你的位置，以便自动填写打卡城市和国家";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "KiroBook 需要访问你的相册，以便添加打卡照片";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -353,7 +369,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.minami-studio.kiro";
 				PRODUCT_NAME = "Kiro Book";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -375,11 +391,11 @@
 				DEVELOPMENT_TEAM = 5CU6L75C9G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WanderLog/Info.plist;
+				INFOPLIST_FILE = KiroBook/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kiro Book";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WanderLog 需要获取你的位置，以便自动填写打卡城市和国家";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "WanderLog 需要访问你的相册，以便添加打卡照片";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "KiroBook 需要获取你的位置，以便自动填写打卡城市和国家";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "KiroBook 需要访问你的相册，以便添加打卡照片";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -390,7 +406,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.minami-studio.kiro";
 				PRODUCT_NAME = "Kiro Book";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -405,7 +421,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		41B7F8112F5C404E00AB0757 /* Build configuration list for PBXProject "WanderLog" */ = {
+		41B7F8112F5C404E00AB0757 /* Build configuration list for PBXProject "KiroBook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41B7F8212F5C405300AB0757 /* Debug */,
@@ -414,7 +430,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		41B7F8232F5C405300AB0757 /* Build configuration list for PBXNativeTarget "WanderLog" */ = {
+		41B7F8232F5C405300AB0757 /* Build configuration list for PBXNativeTarget "KiroBook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				41B7F8242F5C405300AB0757 /* Debug */,

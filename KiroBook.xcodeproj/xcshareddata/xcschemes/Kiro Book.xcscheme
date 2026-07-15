@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "41B7F8152F5C404E00AB0757"
                BuildableName = "Kiro Book.app"
-               BlueprintName = "WanderLog"
-               ReferencedContainer = "container:WanderLog.xcodeproj">
+               BlueprintName = "KiroBook"
+               ReferencedContainer = "container:KiroBook.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,8 +45,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "41B7F8152F5C404E00AB0757"
             BuildableName = "Kiro Book.app"
-            BlueprintName = "WanderLog"
-            ReferencedContainer = "container:WanderLog.xcodeproj">
+            BlueprintName = "KiroBook"
+            ReferencedContainer = "container:KiroBook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,8 +62,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "41B7F8152F5C404E00AB0757"
             BuildableName = "Kiro Book.app"
-            BlueprintName = "WanderLog"
-            ReferencedContainer = "container:WanderLog.xcodeproj">
+            BlueprintName = "KiroBook"
+            ReferencedContainer = "container:KiroBook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -5,6 +5,7 @@ import PhotosUI
 struct ProfileView: View {
     @EnvironmentObject var store: EntryStore
     @EnvironmentObject var lang: LanguageManager
+    @EnvironmentObject var subscription: AppleSubscriptionManager
     @State private var showExportSheet = false
     @State private var showImportSheet = false
     @State private var showAbout = false
@@ -14,6 +15,7 @@ struct ProfileView: View {
     @AppStorage("profile_tagline") private var profileTagline: String = ""
     @State private var isEditingName = false
     @State private var isEditingTagline = false
+    @State private var showUUIDCopied = false
 
     var entries: [Entry] { store.entries }
 
@@ -47,6 +49,7 @@ struct ProfileView: View {
                     if !uniqueCountries.isEmpty { countriesCard }
                     storageCard
                     actionsCard
+                    SubscriptionManagementCard(currentEntryCount: entries.count)
                     Spacer(minLength: 100)
                 }
                 .padding(.horizontal, 20)
@@ -220,9 +223,17 @@ struct ProfileView: View {
             Divider().padding(.horizontal, 16)
             ActionRow(icon: "square.and.arrow.down.fill", label: lang.s.importBackup) { showImportSheet = true }
             Divider().padding(.horizontal, 16)
+            ActionRow(icon: "doc.on.doc.fill", label: lang.s.copyDeviceID) {
+                UIPasteboard.general.string = CloudSyncService.shared.userUUID
+                showUUIDCopied = true
+            }
+            Divider().padding(.horizontal, 16)
             ActionRow(icon: "info.circle.fill", label: lang.s.aboutWander) { showAbout = true }
         }
         .cardStyle()
+        .alert(lang.s.deviceIDCopied, isPresented: $showUUIDCopied) {
+            Button(lang.s.ok) {}
+        }
     }
 }
 
@@ -310,7 +321,7 @@ struct ExportView: View {
         encoder.dateEncodingStrategy = .iso8601
         guard let data = try? encoder.encode(store.entries) else { isExporting = false; return }
         let formatter = DateFormatter(); formatter.dateFormat = "yyyyMMdd"
-        let filename = "WanderLog_\(formatter.string(from: Date())).json"
+        let filename = "KiroBook_\(formatter.string(from: Date())).json"
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
         try? data.write(to: url)
         exportURL = url

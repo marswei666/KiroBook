@@ -1,12 +1,12 @@
 #!/bin/bash
 # ============================================================
-# WANDERLOG · 一次性初始化同步脚本
+# KIROBOOK · 一次性初始化同步脚本
 # 用法：把此脚本放到任意位置，终端运行：
-#   bash sync_wanderlog.sh
+#   bash sync_kirobook.sh
 # ============================================================
 
-TARGET="/Users/mars/Desktop/WanderLog/WanderLog"
-XCODEPROJ="/Users/mars/Desktop/WanderLog/WanderLog.xcodeproj"
+TARGET="/Users/mars/Desktop/KiroBook/KiroBook"
+XCODEPROJ="/Users/mars/Desktop/KiroBook/KiroBook.xcodeproj"
 
 echo "🗂  创建目录结构..."
 mkdir -p "$TARGET"
@@ -1956,8 +1956,8 @@ echo "   ├── ProfileView.swift"
 echo "   └── Assets.xcassets/"
 echo ""
 echo "⚠️  接下来在 Xcode 里："
-echo "   1. 打开 WanderLog.xcodeproj"
-echo "   2. 把 WanderLog/ 文件夹里的 .swift 文件拖入 Xcode 左侧文件树"
+echo "   1. 打开 KiroBook.xcodeproj"
+echo "   2. 把 KiroBook/ 文件夹里的 .swift 文件拖入 Xcode 左侧文件树"
 echo "   3. 把 Assets.xcassets 也拖进去（替换原有的）"
 echo "   4. Signing & Capabilities 里改好 Bundle ID"
 echo "   5. ⌘+R 运行 🎉"

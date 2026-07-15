@@ -1,15 +1,15 @@
-# AGENTS.md — WanderLog
+# AGENTS.md — KiroBook
 
 ## What this is
 
 iOS travel journal app ("Kiro Book") for logging visited cafés, museums, bookstores, bars, etc. Pure SwiftUI, iOS 17+.
 
-The Xcode scheme name is **"Kiro Book"** but the Xcode project/target is **"WanderLog"**.
+The Xcode scheme name is **"Kiro Book"** but the Xcode project/target is **"KiroBook"**.
 
 ## Build & run
 
 ```bash
-open WanderLog.xcodeproj        # then ⌘R in Xcode, scheme "Kiro Book"
+open KiroBook.xcodeproj        # then ⌘R in Xcode, scheme "Kiro Book"
 ```
 
 No SPM, no CocoaPods, no external dependencies. Pure SwiftUI + system frameworks. No Makefile, no CI, no pre-commit hooks, no SwiftLint.
@@ -38,7 +38,7 @@ No SPM, no CocoaPods, no external dependencies. Pure SwiftUI + system frameworks
 
 ## Gotchas
 
-1. **sync_wanderlog.sh is stale** — it bootstraps an older SwiftData-based version of the code. The actual Swift files use `Codable` structs + JSON files, NOT `@Model` / `ModelContainer`. Do not use this script as a source of truth.
+1. **sync_kirobook.sh is stale** — it bootstraps an older SwiftData-based version of the code. The actual Swift files use `Codable` structs + JSON files, NOT `@Model` / `ModelContainer`. Do not use this script as a source of truth.
 
 2. **Two Entry.swift versions** — the sync script contains an old `Entry.swift` with `@Model` and `Tag` as a relationship. The real `Entry.swift` is a plain `Codable` struct with `tags: [String]` and `customCategoryID: UUID?`.
 
@@ -46,10 +46,10 @@ No SPM, no CocoaPods, no external dependencies. Pure SwiftUI + system frameworks
 
 4. **No tests** — there are no unit tests for the app.
 
-5. **App name confusion** — "Kiro Book" is the display/scheme name, "WanderLog" is the project/target/bundle name.
+5. **App name confusion** — "Kiro Book" is the display/scheme name, "KiroBook" is the project/target/bundle name.
 
 6. **Entry migration** — `EntryStore.init()` runs three migrations automatically: seeding default categories, backfilling `sourcePlaceCategory` on custom categories (by icon match), and assigning `customCategoryID` to entries that lack one. Changing category icons will break migration.
 
 7. **Google Translate API** — `TranslationService.apiKey` is empty by default. The app works fine without it; translations just stay in the source language for custom categories.
 
-8. **No root `.gitignore`** — there is no root-level `.gitignore`. The `WanderLog/.gitignore` is a Flutter template (copy-paste artifact), not relevant to the Swift app.
+8. **No root `.gitignore`** — there is no root-level `.gitignore`. The `KiroBook/.gitignore` is a Flutter template (copy-paste artifact), not relevant to the Swift app.

@@ -136,7 +136,29 @@ struct Strings {
     var privacyNote: String    { pick("所有数据仅保存在本设备，不上传任何服务器", "All data is stored on this device only", "すべてのデータはデバイスにのみ保存されます", "모든 데이터는 이 기기에만 저장됩니다", "所有數據僅保存在本設備，不上傳任何伺服器") }
     var exportBackup: String   { pick("导出备份",   "Export Backup",  "バックアップを書き出す", "백업 내보내기", "匯出備份") }
     var importBackup: String   { pick("导入备份",   "Import Backup",  "バックアップを読み込む", "백업 가져오기", "匯入備份") }
+    var copyDeviceID: String   { pick("复制设备 ID", "Copy Device ID", "デバイスIDをコピー", "기기 ID 복사", "複製設備 ID") }
+    var deviceIDCopied: String { pick("设备 ID 已复制", "Device ID copied", "デバイスIDをコピーしました", "기기 ID가 복사되었습니다", "設備 ID 已複製") }
     var aboutWander: String    { pick("关于 Kiro Book", "About Kiro Book", "Kiro Bookについて", "Kiro Book 정보", "關於 Kiro Book") }
+
+    // MARK: Subscription
+    var subUpgradeTitle: String { pick("升级你的手账空间", "Upgrade Your Journal", "手帳スペースをアップグレード", "여행 노트 공간 업그레이드", "升級你的手帳空間") }
+    var subUpgradeDesc: String { pick("免费版可记录有限条打卡。升级后可以继续保存更多旅行灵感和地点。", "The free plan includes a limited number of entries. Upgrade to keep saving more places and travel notes.", "無料版で記録できる件数には上限があります。アップグレードすると、さらに多くの場所を保存できます。", "무료 플랜은 기록 수가 제한됩니다. 업그레이드하면 더 많은 장소와 여행 노트를 저장할 수 있습니다.", "免費版可記錄有限條打卡。升級後可以繼續保存更多旅行靈感和地點。") }
+    var subCurrentPlan: String { pick("当前方案", "Current Plan", "現在のプラン", "현재 플랜", "目前方案") }
+    var subFreePlan: String { pick("免费版", "Free Plan", "無料プラン", "무료 플랜", "免費版") }
+    var subAutoUpgrade: String { pick("推荐", "Recommended", "おすすめ", "추천", "推薦") }
+    var subPriceMonthly: String { pick("/月", "/month", "/月", "/월", "/月") }
+    var subRestore: String { pick("恢复购买", "Restore Purchases", "購入を復元", "구매 복원", "恢復購買") }
+    var subManageSubscription: String { pick("订阅", "Subscription", "サブスクリプション", "구독", "訂閱") }
+    var subManageApple: String { pick("管理 Apple 订阅", "Manage Apple Subscription", "Appleサブスクリプションを管理", "Apple 구독 관리", "管理 Apple 訂閱") }
+    var subManageAppleDesc: String { pick("在 App Store 中取消或更改订阅", "Cancel or change your subscription in the App Store", "App Storeで解約または変更できます", "App Store에서 구독을 취소하거나 변경할 수 있습니다", "在 App Store 中取消或更改訂閱") }
+    var subAppleActive: String { pick("Apple 订阅已生效", "Apple subscription active", "Appleサブスクリプション有効", "Apple 구독 활성화됨", "Apple 訂閱已生效") }
+    var subWhitelistActive: String { pick("内测白名单已生效", "Beta whitelist active", "ベータ許可リスト有効", "베타 허용 목록 활성화됨", "內測白名單已生效") }
+    func subEntriesUsed(_ used: Int, _ max: Int) -> String {
+        if max == Int.max {
+            return pick("已用 \(used) 条 · 不限量", "\(used) used · unlimited", "\(used) 件使用中 · 無制限", "\(used)개 사용 · 무제한", "已用 \(used) 條 · 不限量")
+        }
+        return pick("已用 \(used) / \(max) 条", "\(used) / \(max) entries used", "\(used) / \(max) 件使用中", "\(used) / \(max)개 사용", "已用 \(used) / \(max) 條")
+    }
 
     // MARK: Export
     var exportTitle: String    { pick("备份你的手账", "Backup Your Journal", "手帳をバックアップ", "여행 노트 백업", "備份你的手帳") }
@@ -151,7 +173,7 @@ struct Strings {
     var importButton: String   { pick("导入备份",   "Import",         "読み込む",         "가져오기",      "匯入備份") }
     var importErrCannotRead: String  { pick("无法读取文件，请重试", "Cannot read file, please try again", "ファイルを読み取れません、もう一度お試しください", "파일을 읽을 수 없습니다. 다시 시도해주세요", "無法讀取檔案，請重試") }
     var importErrReadFailed: String  { pick("文件读取失败", "File read failed", "ファイル読み取り失敗", "파일 읽기 실패", "檔案讀取失敗") }
-    var importErrInvalidFormat: String { pick("格式不正确，请选择 WanderLog 导出的备份文件", "Invalid format, please select a WanderLog backup", "形式が正しくありません。WanderLogのバックアップを選択してください", "올바른 형식이 아닙니다. WanderLog 백업 파일을 선택해주세요", "格式不正確，請選擇 WanderLog 匯出的備份檔案") }
+    var importErrInvalidFormat: String { pick("格式不正确，请选择 KiroBook 导出的备份文件", "Invalid format, please select a KiroBook backup", "形式が正しくありません。KiroBookのバックアップを選択してください", "올바른 형식이 아닙니다. KiroBook 백업 파일을 선택해주세요", "格式不正確，請選擇 KiroBook 匯出的備份檔案") }
     var importNoNew: String    { pick("没有新记录可导入", "No new entries to import", "新しい記録はありません", "가져올 새 기록이 없습니다", "沒有新記錄可匯入") }
     func importSuccess(_ count: Int) -> String { pick("成功导入 \(count) 条记录", "Successfully imported \(count) entries", "\(count) 件の記録を読み込みました", "\(count) 개의 기록을 가져왔습니다", "成功匯入 \(count) 條記錄") }
 
@@ -159,7 +181,7 @@ struct Strings {
     var appSubtitle: String    { pick("全球探店电子手账", "Global Shop Diary", "グローバル探店ダイアリー", "글로벌 탐방 다이어리", "全球探店電子手帳") }
     func version(_ v: String) -> String { pick("版本 \(v)", "Version \(v)", "バージョン \(v)", "버전 \(v)", "版本 \(v)") }
     var aboutPrivacy1: String  { pick("所有数据仅保存在你的设备", "All data stays on your device", "すべてのデータはデバイスに保存", "모든 데이터는 기기에 저장", "所有數據僅保存在你的裝置") }
-    var aboutPrivacy2: String  { pick("完全离线可用", "Works fully offline", "完全オフライン対応", "완전 오프라인 지원", "完全離線可用") }
+    var aboutPrivacy2: String  { pick("非打卡定位时，完全离线可用", "Fully offline except when locating check-ins", "チェックイン位置情報の取得時以外は完全オフライン対応", "체크인 위치 확인 시를 제외하고 완전 오프라인 지원", "非打卡定位時，完全離線可用") }
     var aboutPrivacy3: String  { pick("无账号，无追踪，无广告", "No account, no tracking, no ads", "アカウント不要、追跡なし、広告なし", "계정 없음, 추적 없음, 광고 없음", "無帳號，無追蹤，無廣告") }
     var about: String          { pick("关于",       "About",          "について",         "정보",          "關於") }
 

@@ -11,7 +11,7 @@ Email: catz_1201@163.com, marswei20@gmail.com
 
 X (Twitter): https://x.com/marswei666
 
-GitHub Issues: https://github.com/marswei666/WanderLog/issues
+GitHub Issues: https://github.com/marswei666/KiroBook/issues
 
 🔒 Privacy Policy / 隐私政策
 

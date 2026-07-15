@@ -3,7 +3,11 @@ import SwiftUI
 struct RootView: View {
     @State private var selectedTab: Tab = .home
     @State private var showAddEntry = false
+    @State private var showSubscriptionUpgrade = false
+    @State private var requiredTier: SubscriptionTier = .free
     @Environment(\.scenePhase) private var scenePhase
+    @EnvironmentObject var store: EntryStore
+    @EnvironmentObject var subscription: AppleSubscriptionManager
 
 
     enum Tab {
@@ -24,10 +28,37 @@ struct RootView: View {
             }
             .toolbar(.hidden, for: .tabBar)
 
-            CustomTabBar(selectedTab: $selectedTab, showAddEntry: $showAddEntry)
+            CustomTabBar(
+                selectedTab: $selectedTab,
+                onAdd: {
+                    Task {
+                        await subscription.refreshEntitlements()
+                        if subscription.canAddEntry(currentEntryCount: store.entries.count) {
+                            showAddEntry = true
+                        } else {
+                            requiredTier = subscription.requiredTierForEntryCount(store.entries.count + 1)
+                            showSubscriptionUpgrade = true
+                        }
+                    }
+                }
+            )
         }
         .sheet(isPresented: $showAddEntry) {
             AddEntryView()
+        }
+        .fullScreenCover(isPresented: $showSubscriptionUpgrade) {
+            SubscriptionUpgradeSheet(
+                currentEntryCount: store.entries.count,
+                requiredTier: requiredTier
+            )
+        }
+        .task {
+            subscription.initialize()
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .active {
+                Task { await subscription.refreshEntitlements() }
+            }
         }
         .ignoresSafeArea(edges: .bottom)
         .preferredColorScheme(.light)
@@ -36,7 +67,7 @@ struct RootView: View {
 
 struct CustomTabBar: View {
     @Binding var selectedTab: RootView.Tab
-    @Binding var showAddEntry: Bool
+    let onAdd: () -> Void
     @EnvironmentObject var lang: LanguageManager
 
     var body: some View {
@@ -45,7 +76,7 @@ struct CustomTabBar: View {
             TabBarItem(icon: "map.fill", label: lang.s.tabMap, tab: .map, selected: $selectedTab)
 
             Button {
-                showAddEntry = true
+                onAdd()
             } label: {
                 ZStack {
                     Circle()
