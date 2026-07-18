@@ -74,7 +74,7 @@ struct WanderCalendar: View {
             }
             Spacer()
             VStack(spacing: 2) {
-                if lang.language == .english {
+                if [.english, .spanish, .french].contains(lang.language) {
                     Text(yearString)
                         .font(.system(size: 12, weight: .medium))
                         .tracking(0.5)

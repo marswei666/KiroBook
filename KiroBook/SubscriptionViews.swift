@@ -11,6 +11,9 @@ struct SubscriptionUpgradeSheet: View {
 
     @State private var errorMessage: String?
 
+    private let privacyURL = URL(string: "https://github.com/marswei666/KiroBook/blob/main/README.md")!
+    private let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
+
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
@@ -37,6 +40,24 @@ struct SubscriptionUpgradeSheet: View {
                             tierButton(tier)
                         }
                     }
+
+                    Button {
+                        Task { await subscription.restorePurchases() }
+                    } label: {
+                        Label(lang.s.subRestore, systemImage: "arrow.clockwise")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.wanderInk)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                    }
+
+                    HStack(spacing: 16) {
+                        Link(lang.s.subPrivacyPolicy, destination: privacyURL)
+                        Link(lang.s.subTermsOfUse, destination: termsURL)
+                    }
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.wanderMuted)
+                    .frame(maxWidth: .infinity)
 
                     if let errorMessage {
                         Text(errorMessage)
@@ -97,6 +118,11 @@ struct SubscriptionUpgradeSheet: View {
         } label: {
             HStack(spacing: 14) {
                 VStack(alignment: .leading, spacing: 6) {
+                    Text(subscription.product(for: tier)?.displayName ?? tier.displayName)
+                        .font(.system(size: 17, weight: .semibold))
+                    Text(lang.s.subLengthMonthly)
+                        .font(.system(size: 12))
+                        .foregroundColor(isRecommended ? Color.wanderCream.opacity(0.82) : .wanderMuted)
                     HStack(spacing: 8) {
                         Text("\(subscription.displayPrice(for: tier))\(lang.s.subPriceMonthly)")
                             .font(.system(size: 21, weight: .bold))
@@ -137,62 +163,80 @@ struct SubscriptionManagementCard: View {
     @EnvironmentObject var subscription: AppleSubscriptionManager
 
     let currentEntryCount: Int
+    @State private var showSubscriptionUpgrade = false
 
     var body: some View {
-        if subscription.state.isPaid {
-            VStack(alignment: .leading, spacing: 14) {
-                Label(lang.s.subManageSubscription, systemImage: "star.fill")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.wanderMuted)
+        VStack(alignment: .leading, spacing: 14) {
+            Label(lang.s.subManageSubscription, systemImage: "star.fill")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(.wanderMuted)
 
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(lang.s.subCurrentPlan)
-                            .font(.system(size: 12))
-                            .foregroundColor(.wanderMuted)
-                        Text(subscription.displayPrice(for: subscription.state.tier) + lang.s.subPriceMonthly)
-                            .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(.wanderInk)
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(lang.s.subCurrentPlan)
+                        .font(.system(size: 12))
+                        .foregroundColor(.wanderMuted)
+                    Text(currentPlanTitle)
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(.wanderInk)
+                    if subscription.state.isPaid {
                         Text(subscription.state.source == .server ? lang.s.subWhitelistActive : lang.s.subAppleActive)
                             .font(.system(size: 12))
                             .foregroundColor(.wanderMuted)
                     }
-                    Spacer()
                 }
+                Spacer()
+            }
 
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(lang.s.subEntriesUsed(currentEntryCount, subscription.state.tier.maxEntries))
-                        .font(.system(size: 13))
-                        .foregroundColor(.wanderMuted)
-                    GeometryReader { geo in
-                        let maxEntries = subscription.state.tier.maxEntries
-                        let progress = maxEntries == Int.max ? 0.5 : CGFloat(currentEntryCount) / CGFloat(max(maxEntries, 1))
-                        ZStack(alignment: .leading) {
-                            Capsule().fill(Color.wanderBlush).frame(height: 5)
-                            Capsule().fill(Color.wanderAccent)
-                                .frame(width: geo.size.width * min(progress, 1), height: 5)
-                        }
+            VStack(alignment: .leading, spacing: 6) {
+                Text(lang.s.subEntriesUsed(currentEntryCount, subscription.state.tier.maxEntries))
+                    .font(.system(size: 13))
+                    .foregroundColor(.wanderMuted)
+                GeometryReader { geo in
+                    let maxEntries = subscription.state.tier.maxEntries
+                    let progress = maxEntries == Int.max ? 0.5 : CGFloat(currentEntryCount) / CGFloat(max(maxEntries, 1))
+                    ZStack(alignment: .leading) {
+                        Capsule().fill(Color.wanderBlush).frame(height: 5)
+                        Capsule().fill(Color.wanderAccent)
+                            .frame(width: geo.size.width * min(progress, 1), height: 5)
                     }
-                    .frame(height: 5)
                 }
+                .frame(height: 5)
+            }
 
-                Divider()
+            Divider()
 
-                if subscription.state.source == .apple {
-                    Button {
-                        subscription.openManageSubscriptions()
-                    } label: {
-                        ActionContent(icon: "arrow.up.forward.app.fill", title: lang.s.subManageApple, subtitle: lang.s.subManageAppleDesc)
-                    }
+            if subscription.state.source == .apple {
+                Button {
+                    subscription.openManageSubscriptions()
+                } label: {
+                    ActionContent(icon: "arrow.up.forward.app.fill", title: lang.s.subManageApple, subtitle: lang.s.subManageAppleDesc)
+                }
+            } else {
+                Button {
+                    showSubscriptionUpgrade = true
+                } label: {
+                    ActionContent(icon: "star.fill", title: lang.s.subViewPlans, subtitle: lang.s.subViewPlansDesc)
                 }
             }
-            .padding(20)
-            .cardStyle()
         }
+        .padding(20)
+        .cardStyle()
+        .fullScreenCover(isPresented: $showSubscriptionUpgrade) {
+            SubscriptionUpgradeSheet(
+                currentEntryCount: currentEntryCount,
+                requiredTier: subscription.requiredTierForEntryCount(currentEntryCount + 1)
+            )
+        }
+    }
+
+    private var currentPlanTitle: String {
+        guard subscription.state.isPaid else { return lang.s.subFreePlan }
+        return subscription.product(for: subscription.state.tier)?.displayName ?? subscription.state.tier.displayName
     }
 }
 
-private struct ActionContent: View {
+struct ActionContent: View {
     let icon: String
     let title: String
     let subtitle: String?

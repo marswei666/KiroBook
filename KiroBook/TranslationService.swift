@@ -44,8 +44,11 @@ enum TranslationService {
         case .simplifiedChinese:  return "zh-CN"
         case .traditionalChinese: return "zh-TW"
         case .english:            return "en"
+        case .spanish:            return "es"
+        case .french:             return "fr"
         case .japanese:           return "ja"
         case .korean:             return "ko"
+        case .arabic:             return "ar"
         }
     }
 

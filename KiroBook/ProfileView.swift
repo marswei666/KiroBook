@@ -53,6 +53,7 @@ struct ProfileView: View {
                     Spacer(minLength: 100)
                 }
                 .padding(.horizontal, 20)
+                .padding(.bottom, 120)
             }
             .background(Color.wanderWarm)
             .sheet(isPresented: $showExportSheet) { ExportView() }

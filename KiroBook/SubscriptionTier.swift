@@ -54,6 +54,15 @@ enum SubscriptionTier: String, CaseIterable, Identifiable, Codable {
         }
     }
 
+    var displayName: String {
+        switch self {
+        case .free: return "KiroBook Free"
+        case .tier1: return "KiroBook Plus"
+        case .tier2: return "KiroBook Pro"
+        case .tier3: return "KiroBook Max"
+        }
+    }
+
     var transactionAmountCents: Int {
         NSDecimalNumber(decimal: fallbackPrice * 100).intValue
     }
